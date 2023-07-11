@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "prise/api/proto/stubs";
+
+service ProductPriceFeesService {
+  rpc CreateProductPriceFee(ProductPriceFeeRequest) returns (ProductPriceFeeResponse) {}
+  rpc GetProductPriceFee(GetProductPriceFeeRequest) returns (GetProductPriceFeeResponse) {}
+  rpc UpdateProductPriceFee(ProductPriceFeeRequest) returns (ProductPriceFeeResponse) {}
+  rpc DeleteProductPriceFee(DeleteProductPriceFeeRequest) returns (ProductPriceFeeResponse) {}
+}
+
+message ProductPriceFeeRequest {
+  ProductPriceFees productPriceFee = 1;
+}
+
+message ProductPriceFeeResponse {
+  int64 result = 1;
+  string error = 2;
+}
+
+message GetProductPriceFeeRequest {
+  int32 productId = 1;
+  Currency currency = 2;
+}
+
+message DeleteProductPriceFeeRequest {
+  int32 productId = 1;
+  Currency currency = 2;
+}
+
+message GetProductPriceFeeResponse {
+  ProductPriceFees productPriceFee = 1;
+  string error = 2;
+}
+
+message ProductPriceFees {
+  int32 productId = 1;
+  Fee fees = 2;
+  string totalPrice = 3;
+  string pvp = 4;
+  string pvn = 5;
+  Currency sellerCurrency = 6;
+  Currency buyerCurrency = 7;
+}
+
+message Fee {
+  map<string, int32> feeData = 1;
+}
+
+enum Currency {
+  EUR = 0;
+  GBP = 1;
+  USD = 2;
+  JPY = 3;
+  SGD = 4;
+  DKK = 5;
+  CHF = 6;
+  PLN = 7;
+  SEK = 8;
+  CAD = 9;
+  HKD = 10;
+  AUD = 11;
+  KRW = 12;
+}
